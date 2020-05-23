@@ -7,6 +7,7 @@ import java.util.TimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 
 import com.estudando.coursemongodb.domain.Post;
 import com.estudando.coursemongodb.domain.User;
@@ -40,6 +41,9 @@ public class Instantiation implements CommandLineRunner {
 		Post p2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(u1));
 		
 		postRepository.saveAll(Arrays.asList(p1, p2)); 
+		
+		u1.getPosts().addAll(Arrays.asList(p1, p2));
+		userRepository.save(u1);
 	}
 
 }
